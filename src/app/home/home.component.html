@@ -1,0 +1,94 @@
+<!-- <ActionBar class="action-bar">
+    <Label class="action-bar-title" text="Home"></Label>
+</ActionBar> -->
+
+<GridLayout class="page">
+<StackLayout>
+<SegmentedBar [items]="myItems" (selectedIndexChange)="onSelectedIndexChange($event)" class="m-5"></SegmentedBar>
+    <StackLayout visibility="{{ visibility1 ? 'visible' : 'collapsed' }}">
+        <GridLayout columns="*,2*" horizontalAlignment="left" verticalAlignment="top" class="alignment">
+            <Label col="0" horizontalAlignment="right" text="IVy " fontSize="40" color="#4e7ac7"></Label>
+            <Label col="1" text="Intravenous Manager" fontSize="20" color="#4e7ac7"></Label>
+        </GridLayout>
+        <AbsoluteLayout width="350" height="100" >
+                <Image left="10" top="10" src="res://smile" height="45" width="45" ></Image>
+                <Label left="80" top="22" text="{{contactName.length}} active Patients" color="#4e7ac7"></Label>
+                <Image left="7" top="60" src="res://cross" height="50" width="50" ></Image>
+                <Label left="80" top="75" text="{{min}} min. Next I.V. Change" color="#4e7ac7"></Label>
+
+
+              </AbsoluteLayout>
+              <StackLayout>
+                  <Label text=" "></Label>
+              </StackLayout>
+        <GridLayout rows="*, auto" class="page page-content">
+            <StackLayout row="0" orientation="vertical">
+                <ScrollView orientation="vertical">
+            <StackLayout class="page-inner">
+                <GridLayout columns="*, auto, auto" rows="*" class="table table-standings">
+                    <Label text="Patient" textWrap="true" row="0" col="0" class="th team"></Label>
+                    <Label text="Room" textWrap="true" row="0" col="1" class="th Z"></Label>
+                    <Label text="Minutes" textWrap="true" row="0" col="2" class="th V"></Label>
+                </GridLayout>
+                <RadListView [items]="contactName" backgroundColor="transparent" height="500">
+                    <ng-template let-item="item" let-i="index">
+                        <GridLayout columns="*, auto, auto" rows="*" class="table table-standings">
+                            <Label text="{{item.test}}" textWrap="true" row="0" col="0" class="td team"></Label>
+                            <Label text="{{item.r_number}}&emsp;&emsp;" textWrap="true" row="0" col="1" class="td Z"></Label>
+                            <Label text="{{item.time}}&emsp;" textWrap="true" row="0" col="2" class="td V"></Label>
+                        </GridLayout>
+                    </ng-template>
+                    <ListViewGridLayout tkListViewLayout itemHeight="34" scrollDirection="Vertical" spanCount="1"></ListViewGridLayout>
+                </RadListView>
+            </StackLayout>
+                </ScrollView>
+            </StackLayout>
+        </GridLayout>
+    </StackLayout>
+    
+    <StackLayout visibility="{{ visibility2 ? 'visible' : 'collapsed' }}">
+        <GridLayout columns="*,2*" horizontalAlignment="left" verticalAlignment="top" class="alignment">
+            <Label col="0" horizontalAlignment="right" text="IVy " fontSize="40" color="#4e7ac7"></Label>
+            <Label col="1" text="Intravenous Manager" fontSize="20" color="#4e7ac7"></Label>
+        </GridLayout>
+        <StackLayout class="space">
+            <Label class="h3" text="Click SCAN to scan the QR code on the I.V. stand." color="#4e7ac7"></Label>
+            <br><br>
+            <TextField hint="Enter text" class="input input-border" [(ngModel)]="input.username"></TextField>
+            <TextField hint="Enter room number" class="input input-border" [(ngModel)]="input.room_no"></TextField>
+            <TextField hint="Enter time(between 5 to 30)" class="input input-border" [(ngModel)]="input.remaining_time"></TextField>
+			<Button text="Submit" textWrap="true" (tap)="buttonsub()" class="button"></Button>
+        </StackLayout>
+        <StackLayout>
+                <GridLayout>
+                    <BarcodeScanner
+                    *ifIos
+                        height="300"
+                        formats="QR_CODE, EAN_13"
+                        beepOnScan="true"
+                        reportDuplicates="true"
+                        preferFrontCamera="false"
+                        (scanResult)="onScanResult($event)">
+                    </BarcodeScanner>
+                    <Button text="SCAN" (tap)="scanTapped($event)"></Button>
+                    </GridLayout>
+        </StackLayout>
+    </StackLayout>
+    
+    <StackLayout visibility="{{ visibility3 ? 'visible' : 'collapsed' }}">
+        <GridLayout columns="*,2*" horizontalAlignment="left" verticalAlignment="top" class="alignment">
+            <Label col="0" horizontalAlignment="right" text="IVy " fontSize="40" color="#4e7ac7"></Label>
+            <Label col="1" text="Intravenous Manager" fontSize="20" color="#4e7ac7"></Label>
+        </GridLayout>
+        <StackLayout class="space">
+        <Label class="h3" text="You have been signed out." color="#4e7ac7"></Label>
+        <Label class="h3" text="Have a nice day!" color="#4e7ac7"></Label>
+        <StackLayout class="imageMargin">
+
+        <Image src="res://smile" height="100" width="200" ></Image>
+        </StackLayout>
+    </StackLayout>
+    </StackLayout>
+</StackLayout>
+       
+</GridLayout>
